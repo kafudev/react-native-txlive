@@ -1,5 +1,5 @@
 {
-  "name": "react-native-txlive",
+  "name": "@kafudev/react-native-txlive",
   "version": "0.1.6",
   "description": "react-native-txlive 腾讯移动直播SDK",
   "main": "lib/commonjs/index",
