@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, Dimensions, Button, Text } from 'react-native';
+import { StyleSheet, View, Dimensions, Button } from 'react-native';
 import {
   TxlivePlayerView,
   TxlivePusherView,
