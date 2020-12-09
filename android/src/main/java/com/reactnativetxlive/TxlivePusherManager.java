@@ -49,7 +49,9 @@ public class TxlivePusherManager extends SimpleViewManager<TxlivePusherView> {
   public void setUrl(final TxlivePusherView txlivePusherView, String url) {
     mCameraPushMainView = txlivePusherView.getCameraPushMainView();
     if (!url.isEmpty()) {
-      mCameraPushMainView.startPush(url);
+      mCameraPushMainView.mPusherURL = url;
+      mCameraPushMainView.stopPush();
+      mCameraPushMainView.startPush();
       txlivePusherView.onReceiveNativeEvent("setUrl", 1);
     }
   }

@@ -113,7 +113,7 @@ public class CameraPushMainView extends RelativeLayout implements ITXLivePushLis
     private PusherVideoQualityFragment mPusherVideoQualityFragment; // 画质面板
     private LogInfoWindow              mLogInfoWindow;              // Log 信息面板
 
-    private String mPusherURL       = "";   // 推流地址
+    public String mPusherURL       = "";   // 推流地址
     private String mRTMPPlayURL     = "";   // RTMP 拉流地址
     private String mFlvPlayURL      = "";   // flv 拉流地址
     private String mHlsPlayURL      = "";   // hls 拉流地址
@@ -591,9 +591,9 @@ public class CameraPushMainView extends RelativeLayout implements ITXLivePushLis
         return str;
     }
 
-    public void startPush(String murl) {
+    public void startPush() {
         int resultCode = Constants.PLAY_STATUS_SUCCESS;
-        String tRTMPURL = !murl.isEmpty()?murl:Constants.URL_PUSH;
+        String tRTMPURL = !mPusherURL.isEmpty()?mPusherURL:"";
         if (!TextUtils.isEmpty(mPusherURL)) {
             String url[] = mPusherURL.split("###");
             if (url.length > 0) {
@@ -676,7 +676,7 @@ public class CameraPushMainView extends RelativeLayout implements ITXLivePushLis
         onPushStart(resultCode);
     }
 
-    private void stopPush() {
+    public void stopPush() {
         if (!mIsPushing) {
             return;
         }
@@ -704,7 +704,7 @@ public class CameraPushMainView extends RelativeLayout implements ITXLivePushLis
         if (mIsPushing) {
             stopPush();
         } else {
-            startPush("");
+            startPush();
         }
     }
 
@@ -812,7 +812,7 @@ public class CameraPushMainView extends RelativeLayout implements ITXLivePushLis
         mLivePushConfig.setTouchFocus(enable);
         if (mLivePusher.isPushing()) {
             stopPush();
-            startPush("");
+            startPush();
         }
     }
 
@@ -821,7 +821,7 @@ public class CameraPushMainView extends RelativeLayout implements ITXLivePushLis
         mLivePushConfig.setEnableZoom(enable);
         if (mLivePusher.isPushing()) {
             stopPush();
-            startPush("");
+            startPush();
         }
     }
 
