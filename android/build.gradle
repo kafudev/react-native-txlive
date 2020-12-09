@@ -33,9 +33,9 @@ android {
     targetSdkVersion getExtOrIntegerDefault('targetSdkVersion')
     versionCode 1
     versionName "1.0"
-    
+
   }
-  
+
   buildTypes {
     release {
       minifyEnabled false
@@ -127,4 +127,48 @@ dependencies {
   // noinspection GradleDynamicVersion
   api 'com.facebook.react:react-native:+'
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+  implementation "com.tencent.liteav:LiteAVSDK_Professional:latest.release"
+  implementation 'com.tencent.imsdk:imsdk:4.9.1'
+  implementation 'com.github.ctiao:DanmakuFlameMaster:0.5.3'
+
+  // 录制器
+  compile "com.android.support:appcompat-v7:26.0.1"
+  compile "com.android.support:recyclerview-v7:26.0.1"
+  compile 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+  compile 'com.android.support.constraint:constraint-layout:1.0.2'
+  compile 'com.android.support:multidex:1.0.0'
+  compile 'me.dm7.barcodescanner:zxing:1.8.4'
+  compile 'com.google.code.gson:gson:2.3.1'
+  compile "com.android.support:design:26.0.1"
+  compile 'com.kyleduo.switchbutton:library:2.0.0'
+  // compile project(':beautysettingkit')
+  // compile project(':audioeffectsettingkit')
+
+  // 播放器
+  // compile "com.android.support:appcompat-v7:26.0.1"
+  // compile "com.android.support:recyclerview-v7:26.0.1"
+  compile 'me.dm7.barcodescanner:zxing:1.8.4'
+  compile 'com.google.code.gson:gson:2.3.1'
+  // compile 'com.github.ctiao:DanmakuFlameMaster:0.5.3'
+  // compile 'com.android.support.constraint:constraint-layout:1.0.2'
+  androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+      exclude group: 'com.android.support', module: 'support-annotations'
+  })
+  // compile 'com.android.support:multidex:1.0.0'
+  // compile project(':beautysettingkit')
+}
+
+ext {
+    compileSdkVersion = 26
+    buildToolsVersion = "28.0.3"
+    supportSdkVersion = "26.0.1"
+    minSdkVersion = 19
+    targetSdkVersion = 26
+    liteavSdk="com.tencent.liteav:LiteAVSDK_Professional:latest.release"
+    imSdk = 'com.tencent.imsdk:imsdk:4.9.1'
+    versionCode = 1
+    versionName = "v1.0"
+    ndkAbi = 'armeabi'//,'armeabi-v7a', 'arm64-v8a'
+    aekit_version = '1.0.10-cloud'
 }
