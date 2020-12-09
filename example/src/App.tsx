@@ -5,18 +5,14 @@ import {
   TxlivePusherView,
   multiply,
 } from 'react-native-txlive';
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 export default class App extends React.Component {
   constructor(props: Object) {
     super(props);
     this.state = {
       uuid: 'live',
-      result: 0,
       pushUrl: '',
       playUrl: '',
-      show: false,
-      play: true,
-      pause: false,
     };
   }
 
@@ -29,12 +25,10 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { result, pushUrl, playUrl } = this.state;
     return (
       <View style={styles.container}>
-        <Text>Result: {result}</Text>
-        <TxlivePusherView url={pushUrl} style={styles.player} />
-        <TxlivePlayerView url={playUrl} style={styles.player} />
+        <TxlivePusherView url={''} style={styles.player} />
+        <TxlivePlayerView url={''} style={styles.player} />
         {/* <View style={styles.box}>
           <Text>{'这是覆盖层文字'}</Text>
         </View> */}
@@ -42,17 +36,14 @@ export default class App extends React.Component {
           onPress={() => {
             console.log('xxx');
             this.setState({
-              pushUrl:
-                'rtmp://121026.livepush.myqcloud.com/live/' + this.state.uuid,
-              playUrl:
-                'http://livedev.idocore.com/live/' + this.state.uuid + '.flv',
+              pushUrl: 'rtmp://121026.livepush.myqcloud.com/live/live',
+              playUrl: 'http://livedev.idocore.com/live/live',
               // url: 'http://liteavapp.qcloud.com/live/liteavdemoplayerstreamid.flv',
             });
           }}
           title="打开视频"
         />
         <Button
-          style={styles.btn}
           onPress={() => {
             this.setState({
               play: true,
