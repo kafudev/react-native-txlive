@@ -1,7 +1,7 @@
 package com.tencent.liteav.demo.livepusher.camerapush.ui.view;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.tencent.liteav.demo.livepusher.R;
+import com.reactnativetxlive.R;
 
 public class RadioButton extends LinearLayout implements Checkable {
 

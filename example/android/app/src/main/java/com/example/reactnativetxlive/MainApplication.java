@@ -11,6 +11,7 @@ import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+import com.tencent.rtmp.TXLiveBase;
 import com.reactnativetxlive.TxlivePackage;
 
 public class MainApplication extends Application implements ReactApplication {
@@ -49,6 +50,10 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager()); // Remove this line if you don't want Flipper enabled
+    TXLiveBase.setConsoleEnabled(true);
+    String licenceURL = "http://license.vod2.myqcloud.com/license/v1/acf7122905890109548b0f24d8fa5921/TXLiveSDK.licence"; // 获取到的 licence url
+    String licenceKey = "0777aa2d8054fa6d0871a99efad3a04e"; // 获取到的 licence key
+    TXLiveBase.getInstance().setLicence(this, licenceURL, licenceKey);
   }
 
   /**

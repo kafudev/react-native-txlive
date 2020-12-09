@@ -17,13 +17,13 @@ import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.tencent.liteav.demo.liveplayer.R;
+import com.reactnativetxlive.R;
 import com.tencent.rtmp.TXLiveConstants;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.tencent.liteav.demo.beauty.utils.ResourceUtils.getResources;
+//import static com.tencent.liteav.demo.beauty.utils.ResourceUtils.getResources;
 
 /**
  * 自定义 Log 信息展示弹窗
@@ -131,8 +131,8 @@ public class LogInfoWindow extends PopupWindow {
         mBalanceView = LayoutInflater.from(mContext).inflate(R.layout.liveplayer_view_loginfo_balance, null);
         mProgressVideoCache = (ProgressBar) mBalanceView.findViewById(R.id.liveplayer_pb_video_cache);
         mProgressAudioCache = (ProgressBar) mBalanceView.findViewById(R.id.liveplayer_pb_audio_cache);
-        mSeekBarBalance = (BalanceSeekBar) mBalanceView.findViewById(R.id.liveplayer_seekbar_balance);
-        mSeekBarBalance.setEnabled(false);
+//        mSeekBarBalance = (BalanceSeekBar) mBalanceView.findViewById(R.id.liveplayer_seekbar_balance);
+//        mSeekBarBalance.setEnabled(false);
         mTextMaxAutoAdjustCacheTime = (TextView) mBalanceView.findViewById(R.id.liveplayer_tv_max_auto_adjust_cache_time);
     }
 
@@ -143,15 +143,15 @@ public class LogInfoWindow extends PopupWindow {
         list.add(LogInfo.createDownloadSpeedLogInfo("0kbps"));
         list.add(LogInfo.createResolutionLogInfo("0*0"));
         list.add(LogInfo.createFpsGopLogInfo("0 GOP：0"));
-        list.add(LogInfo.createStep1LogInfo(getResources().getString(R.string.liveplayer_start_step1_value)));
-        list.add(LogInfo.createStep2LogInfo(getResources().getString(R.string.liveplayer_start_step2_value)));
-        list.add(LogInfo.createStep3LogInfo(getResources().getString(R.string.liveplayer_start_step3_value)));
-        list.add(LogInfo.createStep4LogInfo(getResources().getString(R.string.liveplayer_start_step4_value)));
-        list.add(LogInfo.createStep5LogInfo(getResources().getString(R.string.liveplayer_start_step5_value)));
+        list.add(LogInfo.createStep1LogInfo(mContext.getResources().getString(R.string.liveplayer_start_step1_value)));
+        list.add(LogInfo.createStep2LogInfo(mContext.getResources().getString(R.string.liveplayer_start_step2_value)));
+        list.add(LogInfo.createStep3LogInfo(mContext.getResources().getString(R.string.liveplayer_start_step3_value)));
+        list.add(LogInfo.createStep4LogInfo(mContext.getResources().getString(R.string.liveplayer_start_step4_value)));
+        list.add(LogInfo.createStep5LogInfo(mContext.getResources().getString(R.string.liveplayer_start_step5_value)));
         setLogInfoList(list);
 
-        mSeekBarBalance.setText("0");
-        mSeekBarBalance.setProgress(0);
+//        mSeekBarBalance.setText("0");
+//        mSeekBarBalance.setProgress(0);
         mProgressVideoCache.setProgress(0);
         mProgressAudioCache.setProgress(0);
     }
@@ -198,7 +198,7 @@ public class LogInfoWindow extends PopupWindow {
     }
 
     private int dip2px(float dpValue) {
-        final float scale = getResources().getDisplayMetrics().density;
+        final float scale = 1; //getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
 
@@ -234,8 +234,8 @@ public class LogInfoWindow extends PopupWindow {
             String balance = String.format("%.1f", status.getFloat(TXLiveConstants.NET_STATUS_AUDIO_CACHE_THRESHOLD));
             int progress = (int) (Float.parseFloat(balance) * 100 / mMaxAutoAdjustCacheTime);
 
-            mSeekBarBalance.setText(balance);
-            mSeekBarBalance.setProgress(progress);
+//            mSeekBarBalance.setText(balance);
+//            mSeekBarBalance.setProgress(progress);
             Log.i(TAG, "balance:" + balance + ",progress:" + progress);
 
             float video_cache_ts = status.getInt(TXLiveConstants.NET_STATUS_VIDEO_CACHE) * 1.0f / 1000;//s
@@ -266,9 +266,9 @@ public class LogInfoWindow extends PopupWindow {
                 case TXLiveConstants.PLAY_EVT_START_VIDEO_DECODER:
                     int mode = event.getInt("EVT_PARAM1");
                     if (mode == DECODER_HARD) {
-                        updateItemText(LogInfo.createStep2LogInfo(getResources().getString(R.string.liveplayer_text_hw_decode_start)));
+                        updateItemText(LogInfo.createStep2LogInfo(mContext.getResources().getString(R.string.liveplayer_text_hw_decode_start)));
                     } else {
-                        updateItemText(LogInfo.createStep2LogInfo(getResources().getString(R.string.liveplayer_text_sw_decode_start)));
+                        updateItemText(LogInfo.createStep2LogInfo(mContext.getResources().getString(R.string.liveplayer_text_sw_decode_start)));
                     }
                     updateItemStatus(LogInfo.createStep2LogInfo(LogInfo.STATUS_SUCCESS));
                     break;
@@ -358,63 +358,78 @@ public class LogInfoWindow extends PopupWindow {
         private String value;
 
         public static LogInfo createModelLogInfo(String value) {
-            return new LogInfo(ID_MODEL, getResources().getString(R.string.liveplayer_model), value);
+          return new LogInfo(ID_MODEL, "", value);
+//            return new LogInfo(ID_MODEL, mContext.getResources().getString(R.string.liveplayer_model), value);
         }
 
         public static LogInfo createVersionLogInfo(String value) {
-            return new LogInfo(ID_VERSION, getResources().getString(R.string.liveplayer_version), value);
+          return new LogInfo(ID_VERSION, "", value);
+//            return new LogInfo(ID_VERSION, mContext.getResources().getString(R.string.liveplayer_version), value);
         }
 
         public static LogInfo createDownloadSpeedLogInfo(String value) {
-            return new LogInfo(ID_DOWNLOAD_SPEED, getResources().getString(R.string.liveplayer_text_download_speed), value);
+          return new LogInfo(ID_DOWNLOAD_SPEED, "", value);
+//            return new LogInfo(ID_DOWNLOAD_SPEED, mContext.getResources().getString(R.string.liveplayer_text_download_speed), value);
         }
 
         public static LogInfo createResolutionLogInfo(String value) {
-            return new LogInfo(ID_RESOLUTION, getResources().getString(R.string.liveplayer_text_resolution_detail), value);
+          return new LogInfo(ID_RESOLUTION, "", value);
+//            return new LogInfo(ID_RESOLUTION, mContext.getResources().getString(R.string.liveplayer_text_resolution_detail), value);
         }
 
         public static LogInfo createFpsGopLogInfo(String value) {
-            return new LogInfo(ID_FPS_GOP, getResources().getString(R.string.liveplayer_text_fps), value);
+          return new LogInfo(ID_FPS_GOP,"", value);
+//            return new LogInfo(ID_FPS_GOP, mContext.getResources().getString(R.string.liveplayer_text_fps), value);
         }
 
         public static LogInfo createStep1LogInfo(String value) {
-            return new LogInfo(ID_STEP_1, STATUS_FAIL, getResources().getString(R.string.liveplayer_start_step1), value);
+          return new LogInfo(ID_STEP_1, STATUS_FAIL, "", value);
+//            return new LogInfo(ID_STEP_1, STATUS_FAIL, mContext.getResources().getString(R.string.liveplayer_start_step1), value);
         }
 
         public static LogInfo createStep1LogInfo(int status) {
-            return new LogInfo(ID_STEP_1, status, getResources().getString(R.string.liveplayer_start_step1), "");
+          return new LogInfo(ID_STEP_1, status, "", "");
+//            return new LogInfo(ID_STEP_1, status, mContext.getResources().getString(R.string.liveplayer_start_step1), "");
         }
 
         public static LogInfo createStep2LogInfo(String value) {
-            return new LogInfo(ID_STEP_2, STATUS_FAIL, getResources().getString(R.string.liveplayer_start_step2), value);
+          return new LogInfo(ID_STEP_2, STATUS_FAIL, "", value);
+//            return new LogInfo(ID_STEP_2, STATUS_FAIL, mContext.getResources().getString(R.string.liveplayer_start_step2), value);
         }
 
         public static LogInfo createStep2LogInfo(int status) {
-            return new LogInfo(ID_STEP_2, status, getResources().getString(R.string.liveplayer_start_step2), "");
+          return new LogInfo(ID_STEP_2, status, "", "");
+//            return new LogInfo(ID_STEP_2, status, mContext.getResources().getString(R.string.liveplayer_start_step2), "");
         }
 
         public static LogInfo createStep3LogInfo(String value) {
-            return new LogInfo(ID_STEP_3, STATUS_FAIL, getResources().getString(R.string.liveplayer_start_step3), value);
+          return new LogInfo(ID_STEP_3, STATUS_FAIL, "", value);
+//            return new LogInfo(ID_STEP_3, STATUS_FAIL, mContext.getResources().getString(R.string.liveplayer_start_step3), value);
         }
 
         public static LogInfo createStep3LogInfo(int status) {
-            return new LogInfo(ID_STEP_3, status, getResources().getString(R.string.liveplayer_start_step3), "");
+          return new LogInfo(ID_STEP_3, status, "", "");
+//            return new LogInfo(ID_STEP_3, status, mContext.getResources().getString(R.string.liveplayer_start_step3), "");
         }
 
         public static LogInfo createStep4LogInfo(String value) {
-            return new LogInfo(ID_STEP_4, STATUS_FAIL, getResources().getString(R.string.liveplayer_start_step4), value);
+          return new LogInfo(ID_STEP_4, STATUS_FAIL, "", value);
+//            return new LogInfo(ID_STEP_4, STATUS_FAIL, mContext.getResources().getString(R.string.liveplayer_start_step4), value);
         }
 
         public static LogInfo createStep4LogInfo(int status) {
-            return new LogInfo(ID_STEP_4, status, getResources().getString(R.string.liveplayer_start_step4), "");
+          return new LogInfo(ID_STEP_4, status, "", "");
+//            return new LogInfo(ID_STEP_4, status, mContext.getResources().getString(R.string.liveplayer_start_step4), "");
         }
 
         public static LogInfo createStep5LogInfo(String value) {
-            return new LogInfo(ID_STEP_5, STATUS_FAIL, getResources().getString(R.string.liveplayer_start_step5), value);
+          return new LogInfo(ID_STEP_5, STATUS_FAIL,"", value);
+//            return new LogInfo(ID_STEP_5, STATUS_FAIL, mContext.getResources().getString(R.string.liveplayer_start_step5), value);
         }
 
         public static LogInfo createStep5LogInfo(int status) {
-            return new LogInfo(ID_STEP_5, status, getResources().getString(R.string.liveplayer_start_step5), "");
+          return new LogInfo(ID_STEP_5, status, "", "");
+//            return new LogInfo(ID_STEP_5, status, mContext.getResources().getString(R.string.liveplayer_start_step5), "");
         }
 
         private LogInfo(int id, String title, String value) {

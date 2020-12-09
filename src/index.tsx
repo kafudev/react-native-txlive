@@ -12,13 +12,13 @@ export async function multiply(a: number, b: number) {
 export class TxlivePlayerView extends Component {
   static defaultProps = {
     style: {},
-    showVideoView: false,
+    url: '',
   };
 
   propTypes = {
     ...View,
     style: PropTypes.object,
-    showVideoView: PropTypes.bool,
+    url: PropTypes.string,
   };
 
   // _onChange = (event: Event) => {
@@ -41,13 +41,13 @@ export class TxlivePlayerView extends Component {
 export class TxlivePusherView extends Component {
   static defaultProps = {
     style: {},
-    showVideoView: false,
+    url: '',
   };
 
   propTypes = {
     ...View,
     style: PropTypes.object,
-    showVideoView: PropTypes.bool,
+    url: PropTypes.string,
   };
 
   // _onChange = (event: Event) => {

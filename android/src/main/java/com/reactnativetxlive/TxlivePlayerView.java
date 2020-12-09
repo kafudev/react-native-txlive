@@ -15,9 +15,11 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.reactnativetxlive.R;
 
+import com.tencent.liteav.demo.liveplayer.ui.LivePlayerMainView;
+
 
 class TxlivePlayerView extends FrameLayout {
-  public LivePlayerView mLivePlayerView;
+  public LivePlayerMainView mLivePlayerMainView;
 
   public TxlivePlayerView(Context context) {
     super(context);
@@ -34,4 +36,25 @@ class TxlivePlayerView extends FrameLayout {
     init(context);
   }
 
+  private void init(Context context) {
+    mLivePlayerMainView = new LivePlayerMainView(context);
+    addView(mLivePlayerMainView);
+  }
+
+  public LivePlayerMainView getLivePlayerMainView() {
+    return mLivePlayerMainView;
+  }
+
+  public void onReceiveNativeEvent(String message, Integer state) {
+    WritableMap event = Arguments.createMap();
+    WritableMap ee = Arguments.createMap();
+    ee.putString("message", message);
+    ee.putInt("state", state);
+    event.putMap("message", ee);
+    ReactContext reactContext = (ReactContext) getContext();
+    reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
+      getId(),
+      "topChange",
+      event);
+  }
 }

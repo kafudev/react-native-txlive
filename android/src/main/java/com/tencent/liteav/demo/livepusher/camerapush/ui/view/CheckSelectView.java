@@ -1,8 +1,8 @@
 package com.tencent.liteav.demo.livepusher.camerapush.ui.view;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -13,7 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.kyleduo.switchbutton.SwitchButton;
-import com.tencent.liteav.demo.livepusher.R;
+import com.reactnativetxlive.R;
 
 /**
  * 单选面板，例如画质选择面板

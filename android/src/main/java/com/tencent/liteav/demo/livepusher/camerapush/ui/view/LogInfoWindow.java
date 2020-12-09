@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.tencent.liteav.demo.livepusher.R;
+import com.reactnativetxlive.R;
 import com.tencent.rtmp.TXLiveConstants;
 
 import java.util.ArrayList;

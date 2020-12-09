@@ -4,13 +4,16 @@ import {
   TxlivePlayerView,
   TxlivePusherView,
   multiply,
-} from '@kafudev/react-native-txlive';
-const { width } = Dimensions.get('window');
+} from 'react-native-txlive';
+const { width, height } = Dimensions.get('window');
 export default class App extends React.Component {
   constructor(props: Object) {
     super(props);
     this.state = {
+      uuid: 'live',
       result: 0,
+      pushUrl: '',
+      playUrl: '',
       show: false,
       play: true,
       pause: false,
@@ -25,30 +28,31 @@ export default class App extends React.Component {
     });
   }
 
+  render1() {
+    return <TxlivePlayerView style={{ width: width, height: height }} />;
+  }
+  render1() {
+    return <TxlivePusherView style={{ width: width, height: height }} />;
+  }
   render() {
-    const { result, show, play, pause, stop } = this.state;
+    const { result, show, play, pause, stop, pushUrl, playUrl } = this.state;
     return (
       <View style={styles.container}>
         <Text>Result: {result}</Text>
-        <TxlivePusherView
-          style={styles.player}
-          showVideoView={show}
-          startPlay={play}
-          pausePlay={pause}
-          stopPlay={stop}
-          onChangeMessage={(msg: object) => {
-            console.log('TxlivePusherView onChangeMessage', msg);
-          }}
-        />
-        <TxlivePlayerView style={styles.player} />
+        <TxlivePusherView url={pushUrl} style={styles.player} />
+        <TxlivePlayerView url={playUrl} style={styles.player} />
         {/* <View style={styles.box}>
           <Text>{'这是覆盖层文字'}</Text>
         </View> */}
         <Button
-          style={styles.btn}
           onPress={() => {
+            console.log('xxx');
             this.setState({
-              show: !show,
+              pushUrl:
+                'rtmp://121026.livepush.myqcloud.com/live/' + this.state.uuid,
+              playUrl:
+                'http://livedev.idocore.com/live/' + this.state.uuid + '.flv',
+              // url: 'http://liteavapp.qcloud.com/live/liteavdemoplayerstreamid.flv',
             });
           }}
           title="打开视频"
@@ -63,28 +67,6 @@ export default class App extends React.Component {
             });
           }}
           title="开始播放"
-        />
-        <Button
-          style={styles.btn}
-          onPress={() => {
-            this.setState({
-              play: false,
-              pause: true,
-              stop: false,
-            });
-          }}
-          title="暂停播放"
-        />
-        <Button
-          style={styles.btn}
-          onPress={() => {
-            this.setState({
-              play: false,
-              pause: false,
-              stop: true,
-            });
-          }}
-          title="停止播放"
         />
       </View>
     );

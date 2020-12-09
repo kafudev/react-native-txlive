@@ -19,11 +19,11 @@ public class Constants {
     public static final String INTENT_URL_PLAY_HLS  = "intent_url_play_hls";
     public static final String INTENT_URL_PLAY_ACC  = "intent_url_play_acc";
 
-    public static final String URL_PUSH        = "url_push";       // RTMP 推流地址
-    public static final String URL_PLAY_RTMP   = "url_play_rtmp";  // RTMP 播放地址
-    public static final String URL_PLAY_FLV    = "url_play_flv";   // FLA  播放地址
-    public static final String URL_PLAY_HLS    = "url_play_hls";   // HLS  播放地址
-    public static final String URL_PLAY_ACC    = "url_play_acc";   // RTMP 加速流地址
+    public static final String URL_PUSH        = "rtmp://121026.livepush.myqcloud.com/live/live?txSecret=dffaf09414534a19f88eb3fd22a41b3a&txTime=5FED9775";       // RTMP 推流地址
+    public static final String URL_PLAY_RTMP   = "rtmp://livedev.idocore.com/live/live";  // RTMP 播放地址
+    public static final String URL_PLAY_FLV    = "http://livedev.idocore.com/live/live.flv";   // FLA  播放地址
+    public static final String URL_PLAY_HLS    = "http://livedev.idocore.com/live/live.m3u8";   // HLS  播放地址
+    public static final String URL_PLAY_ACC    = "webrtc://livedev.idocore.com/live/live";   // RTMP 加速流地址
 
     public static final int PLAY_STATUS_SUCCESS           = 0;
     public static final int PLAY_STATUS_INVALID_URL       = -1;
