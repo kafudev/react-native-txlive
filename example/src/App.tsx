@@ -4,8 +4,8 @@ import {
   TxlivePlayerView,
   TxlivePusherView,
   multiply,
-} from '@kafudev/react-native-txlive';
-import Video from 'react-native-video'
+} from 'react-native-txlive';
+// import Video from 'react-native-video'
 const { width } = Dimensions.get('window');
 export default class App extends React.Component<any, any> {
   constructor(props: Object) {
@@ -31,7 +31,7 @@ export default class App extends React.Component<any, any> {
       <View style={styles.container}>
         {this.state.pushUrl?<TxlivePusherView url={this.state.pushUrl||''}  style={styles.player} />:null}
         {this.state.playUrl?<TxlivePlayerView url={this.state.playUrl||''} log={true} renderRotation={1} style={styles.player} />:null}
-        {this.state.playUrlm3u8?<Video source={{uri:this.state.playUrlm3u8||''}} style={styles.player} />:null}
+        {/* {this.state.playUrlm3u8?<Video source={{uri:this.state.playUrlm3u8||''}} style={styles.player} />:null} */}
         <View style={styles.box}>
           <Text>{'这是覆盖层文字'}</Text>
         </View>
