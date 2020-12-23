@@ -194,6 +194,9 @@ public class LivePusher extends RelativeLayout implements ITXLivePushListener,
 
       //启动本地摄像头预览
       TXCloudVideoView mPusherView = new TXCloudVideoView();
+      RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+      params.addRule(RelativeLayout.CENTER_IN_PARENT);
+      mPusherView.setLayoutParams(params);
       mLivePusher.startCameraPreview(mPusherView);
 
       // 添加推流控件

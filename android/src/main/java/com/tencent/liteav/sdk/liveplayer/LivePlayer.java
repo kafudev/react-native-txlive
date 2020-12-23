@@ -151,6 +151,9 @@ public class LivePlayer extends RelativeLayout implements ITXLivePlayListener {
       mPlayerConfig = new TXLivePlayConfig();
       //mPlayerView 即 step1 中添加的界面 view
       mVideoView = new TXCloudVideoView();
+      RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+      params.addRule(RelativeLayout.CENTER_IN_PARENT);
+      mVideoView.setLayoutParams(params);
       //创建 player 对象
       mLivePlayer = new TXLivePlayer(mContext);
       //关键 player 对象与界面 view
