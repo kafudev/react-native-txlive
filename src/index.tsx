@@ -9,7 +9,7 @@ export async function multiply(a: number, b: number) {
   return await Txlive.multiply(a, b);
 }
 
-export class TxlivePlayerView extends Component {
+export class TxlivePlayerView extends Component<any, any> {
   static defaultProps = {
     style: {},
     url: '',
@@ -38,7 +38,7 @@ export class TxlivePlayerView extends Component {
   }
 }
 
-export class TxlivePusherView extends Component {
+export class TxlivePusherView extends Component<any, any> {
   static defaultProps = {
     style: {},
     url: '',
