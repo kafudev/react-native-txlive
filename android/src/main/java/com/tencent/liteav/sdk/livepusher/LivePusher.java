@@ -20,6 +20,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
+
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.FragmentActivity;
 import androidx.core.content.FileProvider;
@@ -32,6 +34,7 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -95,9 +98,6 @@ public class LivePusher extends RelativeLayout implements ITXLivePushListener,
     private static final String PUSHER_SETTING_FRAGMENT = "push_setting_fragment";
     private static final String PUSHER_PLAY_QR_CODE_FRAGMENT = "push_play_qr_code_fragment";
     private static final String PUSHER_VIDEO_QUALITY_FRAGMENT = "push_video_quality_fragment";
-
-    private TXPhoneStateListener     mPhoneListener;
-    private ActivityRotationObserver mActivityRotationObserver;
 
     private Context mContext;
 
@@ -186,19 +186,30 @@ public class LivePusher extends RelativeLayout implements ITXLivePushListener,
      * 初始化SDK 推流器
      */
     private void initPusher(){
-      mLivePushConfig  = new TXLivePushConfig();
       mLivePusher = new TXLivePusher(mContext);
-
+      mLivePushConfig  = new TXLivePushConfig();
+      mLivePushConfig.enableNearestIP(true);
+      mLivePushConfig.setVideoEncodeGop(5);
       // 一般情况下不需要修改 config 的默认配置
       mLivePusher.setConfig(mLivePushConfig);
 
       //启动本地摄像头预览
-      TXCloudVideoView mPusherView = new TXCloudVideoView();
+      TXCloudVideoView mPusherView = new TXCloudVideoView(mContext);
       RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
       params.addRule(RelativeLayout.CENTER_IN_PARENT);
       mPusherView.setLayoutParams(params);
-      mLivePusher.startCameraPreview(mPusherView);
+      // 是否打开调试信息
+      mPusherView.showLog(mIsDebugInfo);
+      // 显示本地预览的View
+      mPusherView.setVisibility(View.VISIBLE);
+      // 添加播放回调
+      mLivePusher.setPushListener(this);
 
+      // 设置本地预览View
+      mLivePusher.startCameraPreview(mPusherView);
+      if (!mFrontCamera) mLivePusher.switchCamera();
+      // 是否开启观众端镜像观看
+      mLivePusher.setMirror(mIsMirrorEnable);
       // 添加推流控件
       addView(mPusherView);
     }
@@ -219,8 +230,9 @@ public class LivePusher extends RelativeLayout implements ITXLivePushListener,
         return;
       }
       int ret = mLivePusher.startPusher(URL.trim());
+      Log.i(TAG, "startPusher: ret" + ret);
       mIsPushing = true;
-      if(URL){
+      if(!URL.isEmpty()){
         mPusherURL = URL;
       }
       if (ret == -5) {
@@ -302,6 +314,14 @@ public class LivePusher extends RelativeLayout implements ITXLivePushListener,
     }
 
     /**
+     * 设置观众端镜像
+     */
+    public void setMirror(boolean enable) {
+      mIsMirrorEnable = enable;
+      mLivePusher.setMirror(mIsMirrorEnable);
+    }
+
+    /**
      * 设置隐私模式
      * @param enable
      */
@@ -322,6 +342,97 @@ public class LivePusher extends RelativeLayout implements ITXLivePushListener,
      * @param enable
      */
     public void showLog(boolean enable) {
+      mIsDebugInfo = enable;
       mPusherView.showLog(enable);
     }
+
+  @Override
+  public void onAudioQualityChange(int channel, int sampleRate) {
+
   }
+
+  @Override
+  public void onHardwareAcceleration(boolean enable) {
+
+  }
+
+  @Override
+  public void onAdjustBitrateChange(boolean enable) {
+
+  }
+
+  @Override
+  public void onEnableAudioEarMonitoringChange(boolean enable) {
+
+  }
+
+  @Override
+  public void onHomeOrientationChange(boolean isPortrait) {
+
+  }
+
+  @Override
+  public void onPrivateModeChange(boolean enable) {
+
+  }
+
+  @Override
+  public void onMuteChange(boolean enable) {
+
+  }
+
+  @Override
+  public void onMirrorChange(boolean enable) {
+
+  }
+
+  @Override
+  public void onFlashLightChange(boolean enable) {
+
+  }
+
+  @Override
+  public void onWatermarkChange(boolean enable) {
+
+  }
+
+  @Override
+  public void onPureAudioPushChange(boolean enable) {
+
+  }
+
+  @Override
+  public void onTouchFocusChange(boolean enable) {
+
+  }
+
+  @Override
+  public void onEnableZoomChange(boolean enable) {
+
+  }
+
+  @Override
+  public void onClickSnapshot() {
+
+  }
+
+  @Override
+  public void onSendMessage(String string) {
+
+  }
+
+  @Override
+  public void onQualityChange(int type) {
+
+  }
+
+  @Override
+  public void onPushEvent(int i, Bundle bundle) {
+
+  }
+
+  @Override
+  public void onNetStatus(Bundle bundle) {
+
+  }
+}

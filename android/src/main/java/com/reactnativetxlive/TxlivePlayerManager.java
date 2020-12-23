@@ -92,26 +92,26 @@ public class TxlivePlayerManager extends SimpleViewManager<TxlivePlayerView> {
     }
   }
 
-  @ReactProp(name = "HWDecode", defaultInteger = 0)
+  @ReactProp(name = "HWDecode", defaultInt = 0)
   public void setHWDecode(final TxlivePlayerView txlivePlayerView, int mode) {
     mLivePlayer = txlivePlayerView.getLivePlayer();
-    if(mode){
+    if(mode!=0){
       mLivePlayer.setHWDecode(mode);
     }
   }
 
-  @ReactProp(name = "renderRotation", defaultInteger = 0)
+  @ReactProp(name = "renderRotation", defaultInt = 0)
   public void setRenderRotation(final TxlivePlayerView txlivePlayerView, int renderRotation) {
     mLivePlayer = txlivePlayerView.getLivePlayer();
-    if(renderRotation){
+    if(renderRotation!=0){
       mLivePlayer.setRenderRotation(renderRotation);
     }
   }
 
-  @ReactProp(name = "renderMode", defaultInteger = 0)
+  @ReactProp(name = "renderMode", defaultInt = 0)
   public void setRenderMode(final TxlivePlayerView txlivePlayerView, int renderMode) {
     mLivePlayer = txlivePlayerView.getLivePlayer();
-    if(renderMode){
+    if(renderMode!=0){
       mLivePlayer.setRenderMode(renderMode);
     }
   }

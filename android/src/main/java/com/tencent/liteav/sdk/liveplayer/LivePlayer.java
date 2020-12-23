@@ -11,8 +11,9 @@ import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
-import jdk.internal.jline.internal.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -101,8 +102,6 @@ public class LivePlayer extends RelativeLayout implements ITXLivePlayListener {
     private boolean mIsAcc     = false;          //是否播放超低时延视频，测试专用
     private boolean mHWDecode  = false;          //是否启用了硬解码
 
-    private int mCacheStrategy      = Constants.CACHE_STRATEGY_AUTO;                    //Player缓存策略
-    private int mActivityPlayType   = Constants.ACTIVITY_TYPE_LIVE_PLAY;                //播放类型
     private int mCurrentPlayURLType = TXLivePlayer.PLAY_TYPE_LIVE_RTMP;                 //Player 当前播放链接类型
     private int mRenderMode         = TXLiveConstants.RENDER_MODE_ADJUST_RESOLUTION;    //Player 当前渲染模式
     private int mRenderRotation     = TXLiveConstants.RENDER_ROTATION_PORTRAIT;         //Player 当前渲染角度
@@ -150,14 +149,16 @@ public class LivePlayer extends RelativeLayout implements ITXLivePlayListener {
     private void initPlayer(){
       mPlayerConfig = new TXLivePlayConfig();
       //mPlayerView 即 step1 中添加的界面 view
-      mVideoView = new TXCloudVideoView();
+      mVideoView = new TXCloudVideoView(mContext);
       RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
       params.addRule(RelativeLayout.CENTER_IN_PARENT);
+      params.addRule(RelativeLayout.VISIBLE);
       mVideoView.setLayoutParams(params);
       //创建 player 对象
       mLivePlayer = new TXLivePlayer(mContext);
       //关键 player 对象与界面 view
       mLivePlayer.setPlayerView(mVideoView);
+      mLivePlayer.setPlayListener(this);
       mLivePlayer.enableHardwareDecode(mHWDecode);
       mLivePlayer.setRenderRotation(mRenderRotation);
       mLivePlayer.setRenderMode(mRenderMode);
@@ -181,9 +182,10 @@ public class LivePlayer extends RelativeLayout implements ITXLivePlayListener {
        * result返回值：
        * 0 success; -1 empty url; -2 invalid url; -3 invalid playType;
        */
-      code = mLivePlayer.startPlay(URL, TXLivePlayer.PLAY_TYPE_LIVE_FLV); //推荐 FLV
+      int code = mLivePlayer.startPlay(URL, TXLivePlayer.PLAY_TYPE_LIVE_FLV); //推荐 FLV
+      Log.i(TAG, "startPlay: code" + code);
       mIsPlaying = code == 0;
-      if(URL){
+      if(!URL.isEmpty()){
         mPlayURL = URL;
       }
     }
@@ -284,4 +286,14 @@ public class LivePlayer extends RelativeLayout implements ITXLivePlayListener {
     public void showLog(boolean enable) {
       mVideoView.showLog(enable);
     }
+
+  @Override
+  public void onPlayEvent(int i, Bundle bundle) {
+
   }
+
+  @Override
+  public void onNetStatus(Bundle bundle) {
+
+  }
+}
