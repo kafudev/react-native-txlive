@@ -4,15 +4,15 @@ import {
   TxlivePlayerView,
   TxlivePusherView,
   multiply,
-} from 'react-native-txlive';
+} from '@kafudev/react-native-txlive';
 const { width } = Dimensions.get('window');
 export default class App extends React.Component {
   constructor(props: Object) {
     super(props);
     this.state = {
       uuid: 'live',
-      pushUrl: '',
-      playUrl: '',
+      pushUrl: 'rtmp://121026.livepush.myqcloud.com/live/live',
+      playUrl: 'http://livedev.idocore.com/live/live',
     };
   }
 
@@ -27,8 +27,8 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <TxlivePusherView url={''} style={styles.player} />
-        <TxlivePlayerView url={''} style={styles.player} />
+        <TxlivePusherView url={this.state.pushUrl||''} style={styles.player} />
+        <TxlivePlayerView url={this.state.playUrl||''} style={styles.player} />
         {/* <View style={styles.box}>
           <Text>{'这是覆盖层文字'}</Text>
         </View> */}
