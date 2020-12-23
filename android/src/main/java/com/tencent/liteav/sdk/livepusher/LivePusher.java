@@ -308,9 +308,16 @@ public class LivePusher extends RelativeLayout implements ITXLivePushListener,
     /**
      * 切换摄像头
      */
-    public void switchCamera() {
-      mFrontCamera = !mFrontCamera;
-      mLivePusher.switchCamera();
+    public void switchCamera(boolean enable) {
+      if(enable){
+        mFrontCamera = false;
+        mLivePusher.switchCamera();
+      } else {
+        if(!mFrontCamera){
+          mLivePusher.switchCamera();
+        }
+        mFrontCamera = true;
+      }
     }
 
     /**

@@ -178,6 +178,7 @@ public class LivePlayer extends RelativeLayout implements ITXLivePlayListener {
       if(URL.isEmpty()){
         return;
       }
+      mLivePlayer.enableHardwareDecode(mHWDecode);
       /**
        * result返回值：
        * 0 success; -1 empty url; -2 invalid url; -3 invalid playType;
@@ -271,8 +272,8 @@ public class LivePlayer extends RelativeLayout implements ITXLivePlayListener {
      * 设置硬解
      * @param mode
      */
-    public void setHWDecode(int mode) {
-        mHWDecode = mode == 0;
+    public void setHWDecode(boolean enable) {
+        mHWDecode = enable;
         if (mIsPlaying) {
             stopPlay();
             startPlay("");

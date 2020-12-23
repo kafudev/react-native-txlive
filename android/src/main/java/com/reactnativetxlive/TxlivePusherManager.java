@@ -97,10 +97,8 @@ public class TxlivePusherManager extends SimpleViewManager<TxlivePusherView> {
   @ReactProp(name = "frontCamera", defaultBoolean = true)
   public void setFrontCamera(final TxlivePusherView txlivePusherView, boolean enable) {
     mLivePusher = txlivePusherView.getLivePusher();
-    if(enable){
-      mLivePusher.switchCamera();
-      txlivePusherView.onReceiveNativeEvent("switchCamera", 1);
-    }
+    mLivePusher.switchCamera(enable);
+    txlivePusherView.onReceiveNativeEvent("switchCamera", 1);
   }
 
   @ReactProp(name = "mirror", defaultBoolean = true)
