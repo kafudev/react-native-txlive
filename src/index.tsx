@@ -21,12 +21,12 @@ export class TxlivePlayerView extends Component {
     url: PropTypes.string,
   };
 
-  // _onChange = (event: Event) => {
-  //   if (!this.props.onChangeMessage) {
-  //     return;
-  //   }
-  //   this.props.onChangeMessage(event.nativeEvent.message);
-  // };
+  constructor(props: Object) {
+    super(props);
+    this.state = {
+      startPlay: false,
+    };
+  }
 
   render() {
     return (
