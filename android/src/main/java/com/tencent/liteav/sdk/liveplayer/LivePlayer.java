@@ -100,7 +100,7 @@ public class LivePlayer extends RelativeLayout implements ITXLivePlayListener {
     private boolean mIsPlaying = false;
     private boolean mFetching  = false;          //是否正在获取视频源，测试专用
     private boolean mIsAcc     = false;          //是否播放超低时延视频，测试专用
-    private boolean mHWDecode  = false;          //是否启用了硬解码
+    private boolean mHWDecode  = true;          //是否启用了硬解码
 
     private int mCurrentPlayURLType = TXLivePlayer.PLAY_TYPE_LIVE_RTMP;                 //Player 当前播放链接类型
     private int mRenderMode         = TXLiveConstants.RENDER_MODE_ADJUST_RESOLUTION;    //Player 当前渲染模式
