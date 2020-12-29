@@ -105,6 +105,9 @@ public class LivePlayer extends RelativeLayout implements ITXLivePlayListener {
     private int mCurrentPlayURLType = TXLivePlayer.PLAY_TYPE_LIVE_RTMP;                 //Player 当前播放链接类型
     private int mRenderMode         = TXLiveConstants.RENDER_MODE_ADJUST_RESOLUTION;    //Player 当前渲染模式
     private int mRenderRotation     = TXLiveConstants.RENDER_ROTATION_PORTRAIT;         //Player 当前渲染角度
+    private int mCacheTime          = 3;          //播放器缓存时间
+    private int mConnectRetryCount          = 10;          //设置播放器重连次数
+    private int mConnectRetryInterval          = 3;          //设置播放器重连间隔
 
     private long mStartPlayTS       = 0;         //保存开始播放的时间戳，测试专用
 
@@ -162,6 +165,9 @@ public class LivePlayer extends RelativeLayout implements ITXLivePlayListener {
       mLivePlayer.enableHardwareDecode(mHWDecode);
       mLivePlayer.setRenderRotation(mRenderRotation);
       mLivePlayer.setRenderMode(mRenderMode);
+      mLivePlayer.setCacheTime(mCacheTime);
+      mLivePlayer.setConnectRetryCount(mConnectRetryCount);
+      mLivePlayer.setConnectRetryInterval(mConnectRetryInterval);
       mLivePlayer.setConfig(mPlayerConfig);
       // 添加播放控件
       addView(mVideoView);
