@@ -10,6 +10,7 @@
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import "TXLiteAVSDK_Professional/TXLiteAVSDK.h"
 
 #if DEBUG
 #import <FlipperKit/FlipperClient.h>
@@ -36,6 +37,14 @@ static void InitializeFlipper(UIApplication *application) {
   #if DEBUG
     InitializeFlipper(application);
   #endif
+
+  NSString * const licenceURL = @"http://license.vod2.myqcloud.com/license/v1/add2523a58917f0cca11e4ea4bf49d46/TXLiveSDK.licence";
+  NSString * const licenceKey = @"0b1945bbb93b682eb92f81e19cf744e2";
+
+  //TXLiveBase 位于 "TXLiveBase.h" 头文件中
+  [TXLiveBase setLicenceURL:licenceURL key:licenceKey];
+  NSLog(@"SDK Version = %@", [TXLiveBase getSDKVersionStr]);
+
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"TxliveExample"
