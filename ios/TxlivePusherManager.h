@@ -1,5 +1,6 @@
 #import <React/RCTViewManager.h>
+#import <React/RCTBridgeModule.h>
 
-@interface TxlivePusherManager : RCTViewManager
+@interface TxlivePusherManager : RCTViewManager <RCTBridgeModule>
 
 @end

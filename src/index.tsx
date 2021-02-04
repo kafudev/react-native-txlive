@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { requireNativeComponent, NativeModules, View } from 'react-native';
+import { requireNativeComponent, NativeModules, View, Platform } from 'react-native';
 import PropTypes from 'prop-types';
 const { Txlive } = NativeModules;
-const RCTTxlivePlayerView = requireNativeComponent('RCTTxlivePlayerView');
-const RCTTxlivePusherView = requireNativeComponent('RCTTxlivePusherView');
+const RCTTxlivePlayerView = requireNativeComponent(Platform.OS==='ios'?'TxlivePlayerView':'RCTTxlivePlayerView');
+const RCTTxlivePusherView = requireNativeComponent(Platform.OS==='ios'?'TxlivePusherView':'RCTTxlivePusherView');
 
 export async function multiply(a: number, b: number) {
   return await Txlive.multiply(a, b);
