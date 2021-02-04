@@ -301,7 +301,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.TxliveExample.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ruchen.ruchenhui;
 				PRODUCT_NAME = TxliveExample;
 				SWIFT_OBJC_BRIDGING_HEADER = "TxliveExample-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -329,7 +329,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.TxliveExample.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ruchen.ruchenhui;
 				PRODUCT_NAME = TxliveExample;
 				SWIFT_OBJC_BRIDGING_HEADER = "TxliveExample-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

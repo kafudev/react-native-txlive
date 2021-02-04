@@ -4,7 +4,7 @@ import {
   TxlivePlayerView,
   TxlivePusherView,
   multiply,
-} from 'react-native-txlive';
+} from '@kafudev/react-native-txlive';
 // import Video from 'react-native-video'
 const { width } = Dimensions.get('window');
 export default class App extends React.Component<any, any> {
@@ -12,9 +12,9 @@ export default class App extends React.Component<any, any> {
     super(props);
     this.state = {
       uuid: 'live',
-      // pushUrl: 'rtmp://121026.livepush.myqcloud.com/live/live110',
-      // playUrl: 'http://liteavapp.qcloud.com/live/liteavdemoplayerstreamid.flv',
-      // playUrlm3u8: 'http://livedev.idocore.com/live/live.m3u8',
+      pushUrl: 'rtmp://121026.livepush.myqcloud.com/live/live110',
+      playUrl: 'http://liteavapp.qcloud.com/live/liteavdemoplayerstreamid.flv',
+      playUrlm3u8: 'http://livedev.idocore.com/live/live.m3u8',
     };
   }
 
@@ -30,7 +30,7 @@ export default class App extends React.Component<any, any> {
     return (
       <View style={styles.container}>
         {this.state.pushUrl?<TxlivePusherView url={this.state.pushUrl||''} pausePush={this.state.pausePush||false}  resumePush={this.state.resumePush||false} frontCamera = {this.state.frontCamera} style={styles.player} />:null}
-        {this.state.playUrl?<TxlivePlayerView url={this.state.playUrl||''} log={false} renderRotation={0} renderMode={1} style={styles.player} />:null}
+        {this.state.playUrl?<TxlivePlayerView url={this.state.playUrl||''} startPlay={this.state.startPlay||false} stopPlay={this.state.stopPlay||false} log={false} renderRotation={0} renderMode={1} style={styles.player} />:null}
         {/* {this.state.playUrlm3u8?<Video source={{uri:this.state.playUrlm3u8||''}} style={styles.player} />:null} */}
         <View style={styles.box}>
           <Text>{'这是覆盖层文字'}</Text>
@@ -40,7 +40,7 @@ export default class App extends React.Component<any, any> {
             console.log('xxx');
             this.setState({
               pushUrl: 'rtmp://121026.livepush.myqcloud.com/live/live110',
-              playUrl: 'http://livedev.idocore.com/live/live110.flv',
+              playUrl: 'http://liteavapp.qcloud.com/live/liteavdemoplayerstreamid.flv',
               playUrlm3u8: 'http://livedev.idocore.com/live/live110.m3u8',
               // url: 'http://liteavapp.qcloud.com/live/liteavdemoplayerstreamid.flv',
             });
@@ -63,6 +63,22 @@ export default class App extends React.Component<any, any> {
             });
           }}
           title="暂停/恢复直播"
+        />
+        <Button
+          onPress={() => {
+            this.setState({
+              startPlay: !this.state.startPlay,
+            });
+          }}
+          title="开始播放"
+        />
+        <Button
+          onPress={() => {
+            this.setState({
+              stopPlay: !this.state.stopPlay,
+            });
+          }}
+          title="停止播放"
         />
       </View>
     );
