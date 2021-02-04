@@ -1,18 +1,20 @@
 import * as React from 'react';
-import { StyleSheet, View, Dimensions, Button } from 'react-native';
+import { StyleSheet, View, Dimensions, Button,Text } from 'react-native';
 import {
   TxlivePlayerView,
   TxlivePusherView,
   multiply,
-} from '@kafudev/react-native-txlive';
+} from 'react-native-txlive';
+// import Video from 'react-native-video'
 const { width } = Dimensions.get('window');
-export default class App extends React.Component {
+export default class App extends React.Component<any, any> {
   constructor(props: Object) {
     super(props);
     this.state = {
       uuid: 'live',
-      pushUrl: '',
-      playUrl: 'http://liteavapp.qcloud.com/live/liteavdemoplayerstreamid.flv',
+      // pushUrl: 'rtmp://121026.livepush.myqcloud.com/live/live110',
+      // playUrl: 'http://liteavapp.qcloud.com/live/liteavdemoplayerstreamid.flv',
+      // playUrlm3u8: 'http://livedev.idocore.com/live/live.m3u8',
     };
   }
 
@@ -27,17 +29,19 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <TxlivePusherView url={this.state.pushUrl} style={styles.player} />
-        <TxlivePlayerView url={this.state.playUrl} style={styles.player} />
-        {/* <View style={styles.box}>
+        {this.state.pushUrl?<TxlivePusherView url={this.state.pushUrl||''} pausePush={this.state.pausePush||false}  resumePush={this.state.resumePush||false} frontCamera = {this.state.frontCamera} style={styles.player} />:null}
+        {this.state.playUrl?<TxlivePlayerView url={this.state.playUrl||''} log={false} renderRotation={0} renderMode={1} style={styles.player} />:null}
+        {/* {this.state.playUrlm3u8?<Video source={{uri:this.state.playUrlm3u8||''}} style={styles.player} />:null} */}
+        <View style={styles.box}>
           <Text>{'这是覆盖层文字'}</Text>
-        </View> */}
+        </View>
         <Button
           onPress={() => {
             console.log('xxx');
             this.setState({
-              pushUrl: 'rtmp://121026.livepush.myqcloud.com/live/live',
-              playUrl: 'http://livedev.idocore.com/live/live',
+              pushUrl: 'rtmp://121026.livepush.myqcloud.com/live/live110',
+              playUrl: 'http://livedev.idocore.com/live/live110.flv',
+              playUrlm3u8: 'http://livedev.idocore.com/live/live110.m3u8',
               // url: 'http://liteavapp.qcloud.com/live/liteavdemoplayerstreamid.flv',
             });
           }}
@@ -46,12 +50,19 @@ export default class App extends React.Component {
         <Button
           onPress={() => {
             this.setState({
-              play: true,
-              pause: false,
-              stop: false,
+              frontCamera: !this.state.frontCamera,
             });
           }}
-          title="开始播放"
+          title="切换摄像头"
+        />
+        <Button
+          onPress={() => {
+            this.setState({
+              pausePush: !this.state.pausePush,
+              resumePush: this.state.pausePush,
+            });
+          }}
+          title="暂停/恢复直播"
         />
       </View>
     );
@@ -80,11 +91,11 @@ const styles = StyleSheet.create({
     borderTopWidth: 2,
     borderTopColor: '#f60',
     borderRadius: 5,
-    marginTop: 50,
+    marginTop: 10,
     marginLeft: 10,
-    marginBottom: 50,
+    marginBottom: 10,
     width: width - 20,
-    height: 200,
+    height: 160,
   },
   btn: {
     margin: 10,

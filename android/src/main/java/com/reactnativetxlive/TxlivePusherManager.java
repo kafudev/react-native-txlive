@@ -14,14 +14,14 @@ import com.facebook.react.views.image.ImageResizeMode;
 
 import com.reactnativetxlive.R;
 
-import com.tencent.liteav.demo.livepusher.camerapush.ui.CameraPushMainView;
+import com.tencent.liteav.sdk.livepusher.LivePusher;
 
 import java.util.Map;
 
 public class TxlivePusherManager extends SimpleViewManager<TxlivePusherView> {
 
   ReactApplicationContext mCallerContext;
-  CameraPushMainView mCameraPushMainView;
+  LivePusher mLivePusher;
 
   public TxlivePusherManager(ReactApplicationContext reactContext) {
     mCallerContext = reactContext;
@@ -38,55 +38,79 @@ public class TxlivePusherManager extends SimpleViewManager<TxlivePusherView> {
     return new TxlivePusherView(reactContext);
   }
 
-  @ReactProp(name = "showVideoView", defaultBoolean = false)
-  public void setShowVideoView(final TxlivePusherView txlivePusherView, boolean showVideoView) {
-    if (showVideoView) {
-      txlivePusherView.onReceiveNativeEvent("showVideoView", 1);
-    }
-  }
-
   @ReactProp(name = "url")
   public void setUrl(final TxlivePusherView txlivePusherView, String url) {
-    mCameraPushMainView = txlivePusherView.getCameraPushMainView();
+    mLivePusher = txlivePusherView.getLivePusher();
     if (!url.isEmpty()) {
-      mCameraPushMainView.mPusherURL = url;
-      mCameraPushMainView.stopPush();
-      mCameraPushMainView.startPush();
+      mLivePusher.startPush(url);
       txlivePusherView.onReceiveNativeEvent("setUrl", 1);
     }
   }
 
 
-  @ReactProp(name = "startPlay", defaultBoolean = false)
-  public void setStartPlay(final TxlivePusherView txlivePusherView, boolean startPlay) {
-    mCameraPushMainView = txlivePusherView.getCameraPushMainView();
-    if (startPlay) {
-      txlivePusherView.onReceiveNativeEvent("startPlay", 1);
+  @ReactProp(name = "startPush", defaultBoolean = false)
+  public void setStartPush(final TxlivePusherView txlivePusherView, boolean startPush) {
+    mLivePusher = txlivePusherView.getLivePusher();
+    if (startPush) {
+      mLivePusher.startPush("");
+      txlivePusherView.onReceiveNativeEvent("startPush", 1);
     }
   }
 
-  @ReactProp(name = "pausePlay", defaultBoolean = false)
-  public void setPausePlay(final TxlivePusherView txlivePusherView, boolean pausePlay) {
-    mCameraPushMainView = txlivePusherView.getCameraPushMainView();
-    if (pausePlay) {
-      txlivePusherView.onReceiveNativeEvent("pausePlay", 1);
+  @ReactProp(name = "pausePush", defaultBoolean = false)
+  public void setPausePush(final TxlivePusherView txlivePusherView, boolean pausePush) {
+    mLivePusher = txlivePusherView.getLivePusher();
+    if (pausePush) {
+      mLivePusher.pausePush();
+      txlivePusherView.onReceiveNativeEvent("pausePush", 1);
     }
   }
 
-  @ReactProp(name = "stopPlay", defaultBoolean = false)
-  public void setStopPlay(final TxlivePusherView txlivePusherView, boolean stopPlay) {
-    mCameraPushMainView = txlivePusherView.getCameraPushMainView();
-    if (stopPlay) {
-      txlivePusherView.onReceiveNativeEvent("stopPlay", 1);
+  @ReactProp(name = "resumePush", defaultBoolean = false)
+  public void setResumePush(final TxlivePusherView txlivePusherView, boolean resumePush) {
+    mLivePusher = txlivePusherView.getLivePusher();
+    if (resumePush) {
+      mLivePusher.resumePush();
+      txlivePusherView.onReceiveNativeEvent("resumePush", 1);
     }
   }
 
-  @ReactProp(name = "destroyPlay", defaultBoolean = false)
-  public void setDestroyPlay(final TxlivePusherView txlivePusherView, boolean destroyPlay) {
-    mCameraPushMainView = txlivePusherView.getCameraPushMainView();
-    if (destroyPlay) {
-      txlivePusherView.onReceiveNativeEvent("destroyPlay", 1);
+  @ReactProp(name = "stopPush", defaultBoolean = false)
+  public void setStopPush(final TxlivePusherView txlivePusherView, boolean stopPush) {
+    mLivePusher = txlivePusherView.getLivePusher();
+    if (stopPush) {
+      mLivePusher.stopPush();
+      txlivePusherView.onReceiveNativeEvent("stopPush", 1);
     }
   }
 
+  @ReactProp(name = "destroyPush", defaultBoolean = false)
+  public void setDestroyPush(final TxlivePusherView txlivePusherView, boolean destroyPush) {
+    mLivePusher = txlivePusherView.getLivePusher();
+    if (destroyPush) {
+      mLivePusher.destroyPush();
+      txlivePusherView.onReceiveNativeEvent("destroyPush", 1);
+    }
+  }
+
+
+  @ReactProp(name = "frontCamera", defaultBoolean = true)
+  public void setFrontCamera(final TxlivePusherView txlivePusherView, boolean enable) {
+    mLivePusher = txlivePusherView.getLivePusher();
+    mLivePusher.switchCamera(enable);
+    txlivePusherView.onReceiveNativeEvent("switchCamera", 1);
+  }
+
+  @ReactProp(name = "mirror", defaultBoolean = true)
+  public void setMirror(final TxlivePusherView txlivePusherView, boolean enable) {
+    mLivePusher = txlivePusherView.getLivePusher();
+    mLivePusher.setMirror(enable);
+    txlivePusherView.onReceiveNativeEvent("mirror", 1);
+  }
+
+  @ReactProp(name = "log", defaultBoolean = false)
+  public void setLog(final TxlivePusherView txlivePusherView, boolean enable) {
+    mLivePusher = txlivePusherView.getLivePusher();
+    mLivePusher.showLog(enable);
+  }
 }

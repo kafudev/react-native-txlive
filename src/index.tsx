@@ -9,7 +9,7 @@ export async function multiply(a: number, b: number) {
   return await Txlive.multiply(a, b);
 }
 
-export class TxlivePlayerView extends Component {
+export class TxlivePlayerView extends Component<any, any> {
   static defaultProps = {
     style: {},
     url: '',
@@ -21,24 +21,34 @@ export class TxlivePlayerView extends Component {
     url: PropTypes.string,
   };
 
-  // _onChange = (event: Event) => {
-  //   if (!this.props.onChangeMessage) {
-  //     return;
-  //   }
-  //   this.props.onChangeMessage(event.nativeEvent.message);
-  // };
+  constructor(props: Object) {
+    super(props);
+    this.state = {
+      stopPlay: false,
+      destroyPlay: false,
+    };
+  }
+
+  componentWillUnmount() {
+    this.setState({
+      stopPlay: true,
+      destroyPlay: true,
+    });
+  }
 
   render() {
     return (
       <RCTTxlivePlayerView
         {...this.props}
+        stopPlay={this.state.stopPlay || false}
+        destroyPlay={this.state.destroyPlay || false}
         // onChange={this._onChange.bind(this)}
       />
     );
   }
 }
 
-export class TxlivePusherView extends Component {
+export class TxlivePusherView extends Component<any, any> {
   static defaultProps = {
     style: {},
     url: '',
@@ -50,24 +60,29 @@ export class TxlivePusherView extends Component {
     url: PropTypes.string,
   };
 
-  // _onChange = (event: Event) => {
-  //   if (!this.props.onChangeMessage) {
-  //     return;
-  //   }
-  //   this.props.onChangeMessage(event.nativeEvent.message);
-  // };
+  constructor(props: Object) {
+    super(props);
+    this.state = {
+      stopPush: false,
+      destroyPush: false,
+    };
+  }
+
+  componentWillUnmount() {
+    this.setState({
+      stopPush: true,
+      destroyPush: false,
+    });
+  }
 
   render() {
     return (
       <RCTTxlivePusherView
         {...this.props}
+        stopPush={this.state.stopPush || false}
+        destroyPush={this.state.destroyPush || false}
         // onChange={this._onChange.bind(this)}
       />
     );
   }
 }
-
-// TxliveView.propTypes = {
-//   showVideoView: PropTypes.bool,
-//   ...View.propTypes,
-// };

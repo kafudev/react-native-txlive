@@ -15,11 +15,11 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.reactnativetxlive.R;
 
-import com.tencent.liteav.demo.liveplayer.ui.LivePlayerMainView;
+import com.tencent.liteav.sdk.liveplayer.LivePlayer;
 
 
 class TxlivePlayerView extends FrameLayout {
-  public LivePlayerMainView mLivePlayerMainView;
+  public LivePlayer mLivePlayer;
 
   public TxlivePlayerView(Context context) {
     super(context);
@@ -37,12 +37,12 @@ class TxlivePlayerView extends FrameLayout {
   }
 
   private void init(Context context) {
-    mLivePlayerMainView = new LivePlayerMainView(context);
-    addView(mLivePlayerMainView);
+    mLivePlayer = new LivePlayer(context);
+    addView(mLivePlayer);
   }
 
-  public LivePlayerMainView getLivePlayerMainView() {
-    return mLivePlayerMainView;
+  public LivePlayer getLivePlayer() {
+    return mLivePlayer;
   }
 
   public void onReceiveNativeEvent(String message, Integer state) {

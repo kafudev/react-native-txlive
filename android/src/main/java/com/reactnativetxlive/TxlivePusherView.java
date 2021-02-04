@@ -15,11 +15,11 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.reactnativetxlive.R;
 
-import com.tencent.liteav.demo.livepusher.camerapush.ui.CameraPushMainView;
+import com.tencent.liteav.sdk.livepusher.LivePusher;
 
 
 class TxlivePusherView extends FrameLayout {
-  public CameraPushMainView mCameraPushMainView;
+  public LivePusher mLivePusher;
 
   public TxlivePusherView(Context context) {
     super(context);
@@ -37,12 +37,12 @@ class TxlivePusherView extends FrameLayout {
   }
 
   private void init(Context context) {
-    mCameraPushMainView = new CameraPushMainView(context);
-    addView(mCameraPushMainView);
+    mLivePusher = new LivePusher(context);
+    addView(mLivePusher);
   }
 
-  public CameraPushMainView getCameraPushMainView() {
-    return mCameraPushMainView;
+  public LivePusher getLivePusher() {
+    return mLivePusher;
   }
 
   public void onReceiveNativeEvent(String message, Integer state) {
