@@ -165,9 +165,10 @@ public class LivePlayer extends RelativeLayout implements ITXLivePlayListener {
       mLivePlayer.enableHardwareDecode(mHWDecode);
       mLivePlayer.setRenderRotation(mRenderRotation);
       mLivePlayer.setRenderMode(mRenderMode);
-      mLivePlayer.setCacheTime(mCacheTime);
-      mLivePlayer.setConnectRetryCount(mConnectRetryCount);
-      mLivePlayer.setConnectRetryInterval(mConnectRetryInterval);
+      // 配置
+      mPlayerConfig.setCacheTime(mCacheTime);
+      mPlayerConfig.setConnectRetryCount(mConnectRetryCount);
+      mPlayerConfig.setConnectRetryInterval(mConnectRetryInterval);
       mLivePlayer.setConfig(mPlayerConfig);
       // 添加播放控件
       addView(mVideoView);
