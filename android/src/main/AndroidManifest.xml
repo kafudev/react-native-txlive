@@ -1,9 +1,9 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.reactnativetxlive">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.reactnativetxlive" xmlns:tools="http://schemas.android.com/tools">
 
   <application android:theme="@style/AppTheme">
-    <!-- <provider android:name="androidx.core.content.FileProvider" android:authorities="com.tencent.liteav.demo" android:exported="false" android:grantUriPermissions="true">
+    <provider android:name="androidx.core.content.FileProvider" android:authorities="com.tencent.liteav.demo" android:exported="false" android:grantUriPermissions="true" tools:replace="android:authorities">
       <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths" />
-    </provider> -->
+    </provider>
   </application>
 
   <uses-feature android:name="android.hardware.camera" />
