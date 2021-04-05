@@ -9,11 +9,6 @@ module.exports = {
       {
         alias: {
           [pak.name]: path.join(__dirname, '..', pak.source),
-          '@kafudev/react-native-txlive': path.join(
-            __dirname,
-            '..',
-            pak.source
-          ),
         },
       },
     ],

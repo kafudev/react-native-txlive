@@ -4,7 +4,7 @@ import {
   TxlivePlayerView,
   TxlivePusherView,
   multiply,
-} from '@kafudev/react-native-txlive';
+} from 'react-native-txlive';
 // import Video from 'react-native-video'
 const { width } = Dimensions.get('window');
 export default class App extends React.Component<any, any> {
