@@ -136,7 +136,7 @@ dependencies {
   api 'com.facebook.react:react-native:+'
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-  implementation "com.tencent.liteav:LiteAVSDK_Professional:latest.release"
+  implementation "com.tencent.liteav:LiteAVSDK_Professional:8.5.10028"
   implementation 'com.github.ctiao:DanmakuFlameMaster:0.5.3'
 
   compile 'de.hdodenhof:circleimageview:3.1.0'
