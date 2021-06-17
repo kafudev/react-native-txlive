@@ -36,5 +36,5 @@ Pod::Spec.new do |s|
   # s.dependency "AFNetworking"
   # s.dependency 'BlocksKit', '~> 2.2.5'
   # s.dependency 'CWStatusBarNotification', '~> 2.3.5'
-  s.dependency 'TXLiteAVSDK_Professional' #, :podspec => 'http://pod-1252463788.cosgz.myqcloud.com/liteavsdkspec/TXLiteAVSDK_Professional.podspec'
+  s.dependency 'TXLiteAVSDK_Professional', '~> 8.5' #, :podspec => 'http://pod-1252463788.cosgz.myqcloud.com/liteavsdkspec/TXLiteAVSDK_Professional.podspec'
 end
